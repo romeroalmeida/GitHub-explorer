@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useMatch } from 'react-router-dom'
-import { Terminal, Heart, Search } from 'lucide-react'
+import { Terminal, Heart, Search, X } from 'lucide-react'
 import { SearchForm } from '@/shared/components'
 import { useFavoritesStore } from '@/state/useFavoritesStore'
 import { Footer } from '../Footer/Footer'
@@ -34,10 +34,10 @@ export function RootLayout() {
                 <S.SearchToggle
                   type="button"
                   onClick={() => setSearchOpen((open) => !open)}
-                  aria-label="Buscar"
+                  aria-label={searchOpen ? 'Fechar busca' : 'Buscar'}
                   aria-expanded={searchOpen}
                 >
-                  <Search size={18} />
+                  {searchOpen ? <X size={18} /> : <Search size={18} />}
                 </S.SearchToggle>
               </>
             )}

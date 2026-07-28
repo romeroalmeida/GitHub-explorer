@@ -10,7 +10,7 @@ export function HomePage() {
   const recent = favorites.slice(0, RECENT_LIMIT)
 
   return (
-    <S.Screen>
+    <S.Screen $hasFavorites={recent.length > 0}>
       <S.Hero>
         <S.Title>Explore os repositórios de qualquer dev</S.Title>
         <S.Subtitle>

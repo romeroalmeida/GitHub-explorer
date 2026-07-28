@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const Screen = styled.div`
+export const Screen = styled.div<{ $hasFavorites?: boolean }>`
   flex: 1;
   display: grid;
   place-items: center;
   padding: 40px 24px;
 
   @media (max-width: 768px) {
-    min-height: calc(100dvh - 60px);
+    min-height: ${({ $hasFavorites }) =>
+      $hasFavorites ? 'calc(100dvh - 60px)' : 'calc(100dvh - 160px)'};
   }
 `
 
