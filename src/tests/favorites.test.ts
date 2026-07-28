@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
 import type { FavoriteRepo } from '@/shared/types/favorite'
-import { toggleFavorite } from './favorites'
+import { toggleFavorite } from '@/shared/utils/favorites'
 
 const makeFav = (id: number): FavoriteRepo =>
   ({ id, name: `repo-${id}`, ownerLogin: 'dev' }) as FavoriteRepo

@@ -92,6 +92,7 @@ Pasta por pasta:
   da API e utilitários
 - **`state/`** — estado global de verdade com **Zustand**: aqui, a store de
   favoritos, persistida no localStorage
+- **`tests/`** — os testes de unidade com **Vitest** (ordenação, paginação e favoritos)
 
 Algumas regras que eu sigo pra não virar bagunça:
 

@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { getPageItems } from './pagination'
+import { getPageItems } from '@/shared/utils/pagination'
 
 test('lista todas as páginas quando são poucas', () => {
   expect(getPageItems(1, 5)).toEqual([1, 2, 3, 4, 5])

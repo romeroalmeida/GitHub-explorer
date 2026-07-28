@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
 import type { GitHubRepo } from '@/shared/types/github'
-import { sortRepos } from './sortRepos'
+import { sortRepos } from '@/features/users/utils/sortRepos'
 
 const makeRepo = (overrides: Partial<GitHubRepo>): GitHubRepo =>
   ({
