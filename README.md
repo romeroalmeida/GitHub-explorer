@@ -15,12 +15,13 @@ mais populares. Feita como resolução do desafio front-end da Desbravador Softw
 
 ## Tecnologias
 
-- [React 19](https://react.dev/) + [Vite](https://vite.dev/)
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vite.dev/)
 - [React Router](https://reactrouter.com/) para as rotas
 - [TanStack Query](https://tanstack.com/query) para o consumo e cache da API
 - [Axios](https://axios-http.com/) para as requisições
 - [styled-components](https://styled-components.com/) para a estilização
 - [lucide-react](https://lucide.dev/) para os ícones
+- [Vitest](https://vitest.dev/) para os testes
 
 O layout é responsivo, seguindo os mesmos breakpoints do Bootstrap
 (576 / 768 / 992 / 1200 / 1400px).
@@ -36,6 +37,9 @@ npm install
 # ambiente de desenvolvimento (http://localhost:5173)
 npm run dev
 
+# checagem de tipos
+npm run typecheck
+
 # build de produção
 npm run build
 
@@ -46,17 +50,43 @@ npm run preview
 npm test
 ```
 
-## Estrutura
+### Variável de ambiente (opcional)
+
+Sem autenticação a API do GitHub limita a 60 requisições por hora por IP. Para
+elevar esse limite, copie `.env.example` para `.env` e informe um token pessoal:
+
+```
+VITE_GITHUB_TOKEN=seu_token_aqui
+```
+
+## Arquitetura
+
+O projeto segue uma organização **feature-based**: cada domínio é isolado em
+`features/`, e só o que é genuinamente genérico vive em `shared/`.
 
 ```
 src/
-  api/            requisições à API do GitHub (axios)
-  hooks/          hooks de dados com TanStack Query
-  components/     componentes de UI (nav, busca, cartões, ordenação, feedback)
-  pages/          telas: Home, Usuário e Repositório
-  styles/         tema, estilos globais e helpers de media query
-  utils/          formatação, cores das linguagens e ordenação (com testes)
+├── app/                  # Configuração da aplicação
+│   ├── layout/           # Layout raiz (nav + outlet)
+│   ├── providers/        # Providers globais (React Query, tema)
+│   ├── routes/           # Definição das rotas
+│   └── App.tsx
+├── api/                  # Cliente Axios e endpoints da API
+├── features/
+│   ├── search/           # Busca (página inicial)
+│   ├── users/            # Perfil do usuário + listagem/ordenação de repos
+│   └── repositories/     # Detalhes de um repositório
+├── shared/               # Reutilizável entre features
+│   ├── components/       # SearchForm, Feedback (loading/erro/vazio)
+│   ├── styles/           # Tema e estilos globais
+│   ├── types/            # Tipos da API do GitHub
+│   └── utils/            # Formatação, cores de linguagem, tratamento de erro
+└── main.tsx
 ```
+
+Cada feature expõe sua API pública por um barrel (`index.ts`) e cada componente/página
+fica numa pasta com seu próprio `style.ts` (importado como `import * as S`). Imports
+usam o alias `@/` em vez de caminhos relativos longos.
 
 ## Rotas
 
@@ -73,6 +103,3 @@ Os dados vêm da API pública do GitHub:
 - `GET /users/{username}` — dados do usuário
 - `GET /users/{username}/repos` — repositórios do usuário
 - `GET /repos/{owner}/{repo}` — detalhes de um repositório
-
-As requisições são feitas sem autenticação, então estão sujeitas ao limite de
-60 chamadas por hora que o GitHub impõe por IP.

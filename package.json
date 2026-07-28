@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "node --test src/**/*.test.js"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.101.4",
@@ -19,7 +20,12 @@
     "styled-components": "^6.4.4"
   },
   "devDependencies": {
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "vite": "^6.4.3"
+    "typescript": "^5.9.3",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.10"
   }
 }
