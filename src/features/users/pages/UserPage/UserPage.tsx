@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { UserX, FolderGit2 } from 'lucide-react'
-import { Loader, StateMessage, BackHomeLink } from '@/shared/components'
+import { Loader, StateMessage, BackHomeLink, Pagination } from '@/shared/components'
 import { isNotFound } from '@/shared/utils/http'
 import { useUser } from '../../hooks/useUser'
 import { useUserRepos } from '../../hooks/useUserRepos'
@@ -11,16 +11,27 @@ import { SortControls } from '../../components/SortControls/SortControls'
 import { sortRepos, type RepoSort } from '../../utils/sortRepos'
 import * as S from './style'
 
+const PAGE_SIZE = 8
+
 export function UserPage() {
   const { username = '' } = useParams()
   const userQuery = useUser(username)
   const reposQuery = useUserRepos(username)
   const [sort, setSort] = useState<RepoSort>({ field: 'stars', direction: 'desc' })
+  const [page, setPage] = useState(1)
 
   const sortedRepos = useMemo(
     () => sortRepos(reposQuery.data ?? [], sort.field, sort.direction),
     [reposQuery.data, sort],
   )
+
+  const totalPages = Math.ceil(sortedRepos.length / PAGE_SIZE)
+  const pageRepos = sortedRepos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+  // Volta para a primeira página ao trocar de usuário ou de ordenação.
+  useEffect(() => {
+    setPage(1)
+  }, [username, sort])
 
   if (userQuery.isLoading || reposQuery.isLoading) {
     return <Loader label={`Buscando @${username}...`} />
@@ -69,11 +80,18 @@ export function UserPage() {
               description={`@${user.login} ainda não tem repositórios públicos.`}
             />
           ) : (
-            <S.List>
-              {sortedRepos.map((repo) => (
-                <RepoCard key={repo.id} repo={repo} username={username} />
-              ))}
-            </S.List>
+            <>
+              <S.List>
+                {pageRepos.map((repo) => (
+                  <RepoCard key={repo.id} repo={repo} username={username} />
+                ))}
+              </S.List>
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={setPage}
+              />
+            </>
           )}
         </S.Section>
       </S.Grid>
