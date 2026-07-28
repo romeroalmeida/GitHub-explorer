@@ -52,13 +52,11 @@ export const FavLink = styled(Link)`
   gap: 7px;
   padding: 8px 12px;
   border-radius: ${({ theme }) => theme.radius.sm};
-  border: 1px solid ${({ theme }) => theme.colors.border};
   background: ${({ theme }) => theme.colors.panel};
   color: ${({ theme }) => theme.colors.text};
   font-size: 14px;
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.accent};
     color: ${({ theme }) => theme.colors.accent};
   }
 `
