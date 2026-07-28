@@ -2,9 +2,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 28px 20px;
+  width: 100%;
 
   @media (min-width: 768px) {
     padding: 28px 40px;

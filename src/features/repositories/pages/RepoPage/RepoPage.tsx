@@ -8,9 +8,10 @@ import {
   User,
   PackageX,
 } from 'lucide-react'
-import { Loader, StateMessage, BackHomeLink } from '@/shared/components'
+import { Loader, StateMessage, BackHomeLink, FavoriteButton } from '@/shared/components'
 import { isNotFound } from '@/shared/utils/http'
 import { formatCount, formatDate, relativeTime } from '@/shared/utils/format'
+import { toFavorite } from '@/shared/utils/favorites'
 import { useRepository } from '../../hooks/useRepository'
 import * as S from './style'
 
@@ -43,11 +44,11 @@ export function RepoPage() {
   ]
 
   const details = [
-    { label: 'linguagem', value: repo.language || '—' },
-    { label: 'licença', value: repo.license?.spdx_id || 'Sem licença' },
-    { label: 'branch_padrão', value: repo.default_branch },
-    { label: 'criado_em', value: formatDate(repo.created_at) },
-    { label: 'atualizado', value: relativeTime(repo.updated_at) },
+    { label: 'Linguagem', value: repo.language || '—' },
+    { label: 'Licença', value: repo.license?.spdx_id || 'Sem licença' },
+    { label: 'Branch Padrão', value: repo.default_branch },
+    { label: 'Criado Em', value: formatDate(repo.created_at) },
+    { label: 'Atualizado', value: relativeTime(repo.updated_at) },
   ]
 
   return (
@@ -105,6 +106,7 @@ export function RepoPage() {
               <ExternalLink size={16} />
               Ver no GitHub
             </S.PrimaryButton>
+            <FavoriteButton repo={toFavorite(repo)} />
             <S.GhostButton to={`/user/${username}`}>
               <User size={16} />
               Ver perfil de {repo.owner.login}

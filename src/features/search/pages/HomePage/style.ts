@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Screen = styled.div`
   flex: 1;
@@ -45,4 +46,61 @@ export const Subtitle = styled.p`
   max-width: 480px;
   color: ${({ theme }) => theme.colors.dim};
   font-size: 16px;
+`
+
+export const Favorites = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-top: 12px;
+  padding-top: 28px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  text-align: left;
+`
+
+export const FavoritesHead = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+`
+
+export const FavoritesTitle = styled.h2`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.dim};
+
+  svg {
+    color: ${({ theme }) => theme.colors.accent};
+  }
+`
+
+export const SeeAll = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.accent};
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+`
+
+export const FavoritesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `

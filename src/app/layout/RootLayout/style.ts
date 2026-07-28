@@ -39,9 +39,56 @@ export const Brand = styled(Link)`
   }
 `
 
+export const NavActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
+export const FavLink = styled(Link)`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.panel};
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 14px;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accent};
+  }
+`
+
+export const FavLabel = styled.span`
+  display: none;
+
+  @media (min-width: 576px) {
+    display: inline;
+  }
+`
+
+export const FavBadge = styled.span`
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  background: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.bg};
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 11px;
+  font-weight: 700;
+`
+
 export const Main = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
+  justify-content: center;
 `

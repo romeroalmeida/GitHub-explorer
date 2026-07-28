@@ -5,12 +5,14 @@ import { StateMessage, BackHomeLink } from '@/shared/components'
 import { HomePage } from '@/features/search'
 import { UserPage } from '@/features/users'
 import { RepoPage } from '@/features/repositories'
+import { FavoritesPage } from '@/features/favorites'
 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       { path: '/', element: <HomePage /> },
+      { path: '/favorites', element: <FavoritesPage /> },
       { path: '/user/:username', element: <UserPage /> },
       { path: '/user/:username/repo/:repo', element: <RepoPage /> },
       {
