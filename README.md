@@ -4,6 +4,8 @@ Um app que busca um usuário do GitHub e mostra os repositórios mais estrelados
 dele. Fiz como resposta ao desafio front-end da Desbravador. É tudo client-side:
 consome direto a API pública do GitHub, sem backend.
 
+**🔗 Demo:** https://githubexplorer.romerobm.workers.dev
+
 ![Tela inicial do GitHub Explorer](docs/preview.png)
 
 ## O que dá pra fazer
@@ -150,6 +152,13 @@ Bate direto na API pública do GitHub:
 - `GET /users/{username}` — dados do usuário
 - `GET /users/{username}/repos` — repositórios do usuário
 - `GET /repos/{owner}/{repo}` — detalhe de um repositório
+
+## Deploy
+
+Hospedado na **Cloudflare Workers**: https://githubexplorer.romerobm.workers.dev
+
+O build (`pnpm build`) gera os arquivos estáticos em `dist/`, que são servidos como
+assets pelo Worker.
 
 ---
 
