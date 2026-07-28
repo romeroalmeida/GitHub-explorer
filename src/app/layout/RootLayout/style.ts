@@ -8,15 +8,21 @@ export const Shell = styled.div`
 `
 
 export const Nav = styled.header`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`
+
+export const NavInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 14px 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
   @media (min-width: 768px) {
-    padding: 14px 32px;
+    padding: 14px 40px;
   }
 `
 

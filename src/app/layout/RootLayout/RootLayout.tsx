@@ -10,11 +10,13 @@ export function RootLayout() {
   return (
     <S.Shell>
       <S.Nav>
-        <S.Brand to="/">
-          <Terminal size={18} />
-          <span>gh-explorer</span>
-        </S.Brand>
-        {!isHome && <SearchForm variant="mini" />}
+        <S.NavInner>
+          <S.Brand to="/">
+            <Terminal size={18} />
+            <span>gh-explorer</span>
+          </S.Brand>
+          {!isHome && <SearchForm variant="mini" />}
+        </S.NavInner>
       </S.Nav>
       <S.Main>
         <Outlet />
