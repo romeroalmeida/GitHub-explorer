@@ -1,107 +1,132 @@
 # GitHub Explorer
 
-Aplicação client-side para buscar usuários do GitHub e explorar seus repositórios
-mais populares. Feita como resolução do desafio front-end da Desbravador Software.
+Um app que busca um usuário do GitHub e mostra os repositórios mais estrelados
+dele. Fiz como resposta ao desafio front-end da Desbravador. É tudo client-side:
+consome direto a API pública do GitHub, sem backend.
 
 ![Tela inicial do GitHub Explorer](docs/preview.png)
 
-## Funcionalidades
+## O que dá pra fazer
 
-- Buscar um usuário do GitHub pelo login
-- Ver os dados do usuário: avatar, nome, bio, seguidores, seguindo, e-mail e localização
-- Listar os repositórios do usuário, ordenados por estrelas (decrescente) por padrão
-- Reordenar a listagem por estrelas, nome ou data de atualização, em ordem crescente/decrescente
-- Abrir a página de detalhes de um repositório (estrelas, forks, watchers, issues,
-  linguagem, licença, tópicos e link externo para o GitHub)
-- Estados de carregamento, erro e vazio tratados em todas as telas
+- Buscar um usuário pelo login
+- Ver o perfil dele (avatar, bio, seguidores, seguindo, e-mail e localização)
+- Listar os repositórios ordenados por estrelas (decrescente) e trocar a ordem —
+  por estrelas, nome ou data de atualização, crescente ou decrescente
+- Paginar a listagem
+- Abrir o detalhe de um repositório (estrelas, forks, watchers, issues, linguagem,
+  licença, tópicos e link pro GitHub)
+- Favoritar repositórios: ficam salvos no navegador (localStorage), aparecem na
+  home e numa página só deles
 
-## Tecnologias
+Carregamento, erro e estado vazio são tratados em todas as telas.
 
-- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vite.dev/)
-- [React Router](https://reactrouter.com/) para as rotas
-- [TanStack Query](https://tanstack.com/query) para o consumo e cache da API
-- [Axios](https://axios-http.com/) para as requisições
-- [styled-components](https://styled-components.com/) para a estilização
-- [lucide-react](https://lucide.dev/) para os ícones
-- [Vitest](https://vitest.dev/) para os testes
+## Rodando o projeto
 
-O layout é responsivo, seguindo os mesmos breakpoints do Bootstrap
-(576 / 768 / 992 / 1200 / 1400px).
-
-## Como rodar
-
-Requer Node.js 18 ou superior.
+Precisa de Node 18+. Uso **pnpm** aqui, mas funciona igual com npm ou yarn.
 
 ```bash
 # instalar as dependências
-npm install
+pnpm install
 
-# ambiente de desenvolvimento (http://localhost:5173)
-npm run dev
+# rodar em desenvolvimento (http://localhost:5173)
+pnpm dev
 
-# checagem de tipos
-npm run typecheck
+# checar os tipos
+pnpm typecheck
 
 # build de produção
-npm run build
+pnpm build
 
 # pré-visualizar o build
-npm run preview
+pnpm preview
 
 # rodar os testes
-npm test
+pnpm test
 ```
 
-### Variável de ambiente (opcional)
+> Com npm é o mesmo, só trocar `pnpm` por `npm run` (ex.: `npm run dev`).
 
-Sem autenticação a API do GitHub limita a 60 requisições por hora por IP. Para
-elevar esse limite, copie `.env.example` para `.env` e informe um token pessoal:
+### Token do GitHub (recomendado)
 
-```
-VITE_GITHUB_TOKEN=seu_token_aqui
-```
+Sem autenticação, a API do GitHub libera só 60 requisições por hora por IP. Com um
+token isso sobe pra 5.000/h. É opcional, mas se você buscar bastante vai esbarrar
+no limite.
 
-## Arquitetura
+1. Gere um token em [github.com/settings/tokens](https://github.com/settings/tokens)
+   (pode ser um _classic_ sem marcar nenhum scope — só leitura de dados públicos já basta)
+2. Copie `.env.example` para `.env` e cole o token:
 
-O projeto segue uma organização **feature-based**: cada domínio é isolado em
-`features/`, e só o que é genuinamente genérico vive em `shared/`.
+   ```
+   VITE_GITHUB_TOKEN=seu_token_aqui
+   ```
 
-```
-src/
-├── app/                  # Configuração da aplicação
-│   ├── layout/           # Layout raiz (nav + outlet)
-│   ├── providers/        # Providers globais (React Query, tema)
-│   ├── routes/           # Definição das rotas
-│   └── App.tsx
-├── api/                  # Cliente Axios e endpoints da API
-├── features/
-│   ├── search/           # Busca (página inicial)
-│   ├── users/            # Perfil do usuário + listagem/ordenação de repos
-│   └── repositories/     # Detalhes de um repositório
-├── shared/               # Reutilizável entre features
-│   ├── components/       # SearchForm, Feedback (loading/erro/vazio)
-│   ├── styles/           # Tema e estilos globais
-│   ├── types/            # Tipos da API do GitHub
-│   └── utils/            # Formatação, cores de linguagem, tratamento de erro
-└── main.tsx
-```
+3. Reinicie o dev server.
 
-Cada feature expõe sua API pública por um barrel (`index.ts`) e cada componente/página
-fica numa pasta com seu próprio `style.ts` (importado como `import * as S`). Imports
-usam o alias `@/` em vez de caminhos relativos longos.
+Como é um app client-side, use sempre um token só de leitura pública e nunca faça
+deploy com ele exposto.
+
+## Como eu organizo o projeto
+
+Gosto de estruturar meus projetos React numa arquitetura **feature-based**: cada
+domínio vive isolado em `features/`, e só o que é realmente genérico sobe pra
+`shared/`. Assim dá pra entender e mexer numa feature sem caçar arquivo espalhado
+pelo projeto inteiro.
+
+Essa é a estrutura base que eu sigo:
+
+![Arquitetura feature-based](docs/architecture.png)
+
+Neste projeto ela ficou assim:
+
+- **`app/`** — o que liga tudo: rotas (`routes/`), providers (React Query + tema em
+  `providers/`) e o layout raiz com header e footer (`layout/`)
+- **`api/`** — o cliente Axios (`apiClient.ts`) e os endpoints do GitHub
+  (`endpoints.ts`). Só a configuração; quem busca os dados é cada feature
+- **`features/`** — os domínios:
+  - `search/` — a home / busca
+  - `users/` — perfil do usuário + listagem e ordenação de repositórios
+  - `repositories/` — o detalhe de um repositório
+  - `favorites/` — a página de favoritos
+- **`shared/`** — o reaproveitável entre features: componentes (busca, feedback de
+  loading/erro, paginação, botão e card de favorito), estilos/tema, tipos da API e
+  utilitários
+- **`state/`** — estado global de verdade com **Zustand**: aqui, a store de
+  favoritos, persistida no localStorage
+
+Algumas regras que eu sigo pra não virar bagunça:
+
+- **feature não importa de outra feature.** Se `users` precisasse de algo de
+  `repositories`, esse algo estaria no lugar errado → vai pra `shared/`
+- cada feature expõe só o que é público por um **barrel** (`index.ts`); o resto é privado
+- import por **alias `@/`** no lugar de `../../../`
+- cada componente/página fica numa pasta com seu próprio `style.ts`
+  (styled-components), importado como `import * as S` e usado como `<S.Container>`
 
 ## Rotas
 
-| Rota                             | Tela                              |
-| -------------------------------- | --------------------------------- |
-| `/`                              | Busca                             |
-| `/user/:username`                | Dados do usuário + repositórios   |
-| `/user/:username/repo/:repo`     | Detalhes do repositório           |
+| Rota                           | Tela                            |
+| ------------------------------ | ------------------------------- |
+| `/`                            | Busca + favoritos recentes      |
+| `/favorites`                   | Todos os favoritos              |
+| `/user/:username`              | Perfil + repositórios           |
+| `/user/:username/repo/:repo`   | Detalhe do repositório          |
+
+## O que usei
+
+- **React 19 + TypeScript + Vite**
+- **React Router** — rotas
+- **TanStack Query (React Query)** — consumo e cache da API
+- **Axios** — requisições
+- **Zustand** (+ middleware `persist`) — favoritos no localStorage
+- **styled-components** — estilos, com breakpoints no padrão do Bootstrap
+  (576 / 768 / 992 / 1200 / 1400px)
+- **lucide-react** — ícones
+- **Vitest** — testes (ordenação, paginação e favoritos)
 
 ## API
 
-Os dados vêm da API pública do GitHub:
+Bate direto na API pública do GitHub:
 
 - `GET /users/{username}` — dados do usuário
 - `GET /users/{username}/repos` — repositórios do usuário
-- `GET /repos/{owner}/{repo}` — detalhes de um repositório
+- `GET /repos/{owner}/{repo}` — detalhe de um repositório
