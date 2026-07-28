@@ -3,6 +3,8 @@
 Aplicação client-side para buscar usuários do GitHub e explorar seus repositórios
 mais populares. Feita como resolução do desafio front-end da Desbravador Software.
 
+![Tela inicial do GitHub Explorer](docs/preview.png)
+
 ## Funcionalidades
 
 - Buscar um usuário do GitHub pelo login
