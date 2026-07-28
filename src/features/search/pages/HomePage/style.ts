@@ -6,6 +6,10 @@ export const Screen = styled.div`
   display: grid;
   place-items: center;
   padding: 40px 24px;
+
+  @media (max-width: 768px) {
+    min-height: calc(100dvh - 60px);
+  }
 `
 
 export const Hero = styled.div`

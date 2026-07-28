@@ -34,6 +34,11 @@ export const HeroInput = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.colors.dim};
   }
+
+  /* Evita o zoom automático do iOS ao focar (fonte precisa ser >= 16px) */
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `
 
 export const SubmitButton = styled.button`
@@ -80,5 +85,9 @@ export const MiniInput = styled.input`
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.dim};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
   }
 `
