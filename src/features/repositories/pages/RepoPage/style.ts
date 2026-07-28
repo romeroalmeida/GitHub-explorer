@@ -24,6 +24,13 @@ export const Head = styled.div`
   gap: 12px;
 `
 
+export const TopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+`
+
 export const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;

@@ -5,7 +5,7 @@ import * as S from './style'
 
 interface FavoriteButtonProps {
   repo: FavoriteRepo
-  variant?: 'button' | 'icon'
+  variant?: 'button' | 'icon' | 'subtle'
 }
 
 export function FavoriteButton({ repo, variant = 'button' }: FavoriteButtonProps) {
@@ -15,30 +15,41 @@ export function FavoriteButton({ repo, variant = 'button' }: FavoriteButtonProps
   const toggle = useFavoritesStore((state) => state.toggle)
 
   const label = isFavorite ? 'Favoritado' : 'Favoritar'
-  const heart = <Heart size={variant === 'icon' ? 17 : 16} fill={isFavorite ? 'currentColor' : 'none'} />
+  const size = variant === 'button' ? 16 : 17
+  const heart = (
+    <Heart
+      size={size}
+      fill={isFavorite ? (variant === 'subtle' ? '#E5484D' : 'currentColor') : 'none'}
+      color={isFavorite && variant === 'subtle' ? '#E5484D' : undefined}
+    />
+  )
+
+  const shared = {
+    type: 'button' as const,
+    $active: isFavorite,
+    onClick: () => toggle(repo),
+    'aria-pressed': isFavorite,
+  }
 
   if (variant === 'icon') {
     return (
-      <S.IconButton
-        type="button"
-        $active={isFavorite}
-        onClick={() => toggle(repo)}
-        aria-pressed={isFavorite}
-        aria-label={label}
-        title={label}
-      >
+      <S.IconButton {...shared} aria-label={label} title={label}>
         {heart}
       </S.IconButton>
     )
   }
 
+  if (variant === 'subtle') {
+    return (
+      <S.SubtleButton {...shared}>
+        {heart}
+        {label}
+      </S.SubtleButton>
+    )
+  }
+
   return (
-    <S.Button
-      type="button"
-      $active={isFavorite}
-      onClick={() => toggle(repo)}
-      aria-pressed={isFavorite}
-    >
+    <S.Button {...shared}>
       {heart}
       {label}
     </S.Button>

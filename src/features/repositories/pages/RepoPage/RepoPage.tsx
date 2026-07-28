@@ -55,10 +55,13 @@ export function RepoPage() {
     <S.Container>
       <S.Inner>
         <S.Head>
-          <S.BackLink to={`/user/${username}`}>
-            <S.Prompt>cd ..</S.Prompt>
-            <span>voltar para os repositórios</span>
-          </S.BackLink>
+          <S.TopRow>
+            <S.BackLink to={`/user/${username}`}>
+              <S.Prompt>cd ..</S.Prompt>
+              <span>voltar para os repositórios</span>
+            </S.BackLink>
+            <FavoriteButton repo={toFavorite(repo)} variant="subtle" />
+          </S.TopRow>
           <S.Breadcrumb>
             <S.OwnerAvatar src={repo.owner.avatar_url} alt="" />
             <span>{repo.owner.login} /</span>
@@ -106,7 +109,6 @@ export function RepoPage() {
               <ExternalLink size={16} />
               Ver no GitHub
             </S.PrimaryButton>
-            <FavoriteButton repo={toFavorite(repo)} />
             <S.GhostButton to={`/user/${username}`}>
               <User size={16} />
               Ver perfil de {repo.owner.login}

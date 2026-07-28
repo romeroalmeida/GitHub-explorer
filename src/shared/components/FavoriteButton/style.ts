@@ -20,6 +20,23 @@ export const Button = styled.button<{ $active?: boolean }>`
   }
 `
 
+export const SubtleButton = styled.button<{ $active?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme, $active }) => ($active ? theme.colors.text : theme.colors.dim)};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+  }
+`
+
 export const IconButton = styled.button<{ $active?: boolean }>`
   display: grid;
   place-items: center;
