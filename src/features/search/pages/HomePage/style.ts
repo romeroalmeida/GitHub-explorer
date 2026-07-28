@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Screen = styled.div`
-  min-height: calc(100vh - 57px);
+  flex: 1;
   display: grid;
   place-items: center;
   padding: 40px 24px;
