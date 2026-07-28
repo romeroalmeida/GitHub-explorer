@@ -45,6 +45,39 @@ export const NavActions = styled.div`
   gap: 10px;
 `
 
+export const MiniSearch = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+export const SearchToggle = styled.button`
+  display: none;
+  place-items: center;
+  padding: 9px 11px;
+  border: none;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background: ${({ theme }) => theme.colors.panel};
+  color: ${({ theme }) => theme.colors.text};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+  }
+
+  @media (max-width: 768px) {
+    display: grid;
+  }
+`
+
+export const MobileSearch = styled.div`
+  padding: 12px 20px 14px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`
+
 export const FavLink = styled(Link)`
   position: relative;
   display: inline-flex;

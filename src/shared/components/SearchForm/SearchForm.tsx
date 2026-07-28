@@ -6,9 +6,14 @@ import * as S from './style'
 interface SearchFormProps {
   variant?: 'hero' | 'mini'
   initialValue?: string
+  onSubmitted?: () => void
 }
 
-export function SearchForm({ variant = 'hero', initialValue = '' }: SearchFormProps) {
+export function SearchForm({
+  variant = 'hero',
+  initialValue = '',
+  onSubmitted,
+}: SearchFormProps) {
   const [value, setValue] = useState(initialValue)
   const navigate = useNavigate()
 
@@ -17,6 +22,7 @@ export function SearchForm({ variant = 'hero', initialValue = '' }: SearchFormPr
     const username = value.trim()
     if (!username) return
     navigate(`/user/${encodeURIComponent(username)}`)
+    onSubmitted?.()
   }
 
   if (variant === 'mini') {
