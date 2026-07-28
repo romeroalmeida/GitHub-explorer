@@ -20,7 +20,7 @@ export function RootLayout() {
           <S.NavActions>
             {!isHome && <SearchForm variant="mini" />}
             <S.FavLink to="/favorites" aria-label="Favoritos">
-              <Heart size={16} />
+              <Heart size={16} color="#E5484D" fill="#E5484D" />
               <S.FavLabel>Favoritos</S.FavLabel>
               {favoritesCount > 0 && <S.FavBadge>{favoritesCount}</S.FavBadge>}
             </S.FavLink>
