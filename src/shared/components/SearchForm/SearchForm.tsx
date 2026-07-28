@@ -39,7 +39,7 @@ export function SearchForm({ variant = 'hero', initialValue = '' }: SearchFormPr
       <S.HeroInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="torvalds"
+        placeholder="github"
         aria-label="Buscar usuário do GitHub"
         autoFocus
       />
