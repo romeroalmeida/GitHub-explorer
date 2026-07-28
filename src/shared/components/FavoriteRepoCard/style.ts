@@ -14,13 +14,13 @@ export const Card = styled.div`
   }
 `
 
-export const Body = styled(Link)`
+export const Body = styled(Link)<{ $compact?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ $compact }) => ($compact ? '6px' : '8px')};
   flex: 1;
   min-width: 0;
-  padding: 16px 18px;
+  padding: ${({ $compact }) => ($compact ? '11px 14px' : '16px 18px')};
 `
 
 export const Header = styled.div`

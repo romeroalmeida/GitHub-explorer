@@ -32,7 +32,7 @@ export function HomePage() {
             </S.FavoritesHead>
             <S.FavoritesGrid>
               {recent.map((repo) => (
-                <FavoriteRepoCard key={repo.id} repo={repo} />
+                <FavoriteRepoCard key={repo.id} repo={repo} compact />
               ))}
             </S.FavoritesGrid>
           </S.Favorites>
