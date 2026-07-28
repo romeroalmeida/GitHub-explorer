@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="637" height="674" viewBox="0 0 637 674" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="13">
+  <rect x="0.5" y="0.5" width="636" height="673" rx="12" fill="#0E1117" stroke="#273040"/>
+  <text x="22" y="37" xml:space="preserve"><tspan fill="#4FD1A5">src/</tspan></text>
+  <text x="22" y="58" xml:space="preserve"><tspan fill="#3D4A5C">├── </tspan><tspan fill="#4FD1A5">app/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># configuração da aplicação</tspan></text>
+  <text x="22" y="79" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#C9D1D9">App.tsx</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># provider raiz + RouterProvider</tspan></text>
+  <text x="22" y="100" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#C9D1D9">routes/index.tsx</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># createBrowserRouter</tspan></text>
+  <text x="22" y="121" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#C9D1D9">providers/AppProviders.tsx</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># React Query + tema + GlobalStyle</tspan></text>
+  <text x="22" y="142" xml:space="preserve"><tspan fill="#3D4A5C">│   └── </tspan><tspan fill="#4FD1A5">layout/</tspan></text>
+  <text x="22" y="163" xml:space="preserve"><tspan fill="#3D4A5C">│       ├── </tspan><tspan fill="#4FD1A5">RootLayout/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># header (nav) + Outlet</tspan></text>
+  <text x="22" y="184" xml:space="preserve"><tspan fill="#3D4A5C">│       └── </tspan><tspan fill="#4FD1A5">Footer/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># rodapé</tspan></text>
+  <text x="22" y="205" xml:space="preserve"><tspan fill="#3D4A5C">├── </tspan><tspan fill="#4FD1A5">api/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># configuração da API</tspan></text>
+  <text x="22" y="226" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#C9D1D9">apiClient.ts</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># instância do Axios</tspan></text>
+  <text x="22" y="247" xml:space="preserve"><tspan fill="#3D4A5C">│   └── </tspan><tspan fill="#C9D1D9">endpoints.ts</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># endpoints do GitHub</tspan></text>
+  <text x="22" y="268" xml:space="preserve"><tspan fill="#3D4A5C">├── </tspan><tspan fill="#4FD1A5">features/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># domínios isolados</tspan></text>
+  <text x="22" y="289" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">search/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># home / busca</tspan></text>
+  <text x="22" y="310" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">users/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># perfil + repositórios</tspan></text>
+  <text x="22" y="331" xml:space="preserve"><tspan fill="#3D4A5C">│   │   ├── </tspan><tspan fill="#4FD1A5">components/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># UserCard, RepoCard, SortControls</tspan></text>
+  <text x="22" y="352" xml:space="preserve"><tspan fill="#3D4A5C">│   │   ├── </tspan><tspan fill="#4FD1A5">hooks/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># useUser, useUserRepos</tspan></text>
+  <text x="22" y="373" xml:space="preserve"><tspan fill="#3D4A5C">│   │   ├── </tspan><tspan fill="#4FD1A5">pages/UserPage/</tspan></text>
+  <text x="22" y="394" xml:space="preserve"><tspan fill="#3D4A5C">│   │   ├── </tspan><tspan fill="#C9D1D9">services/usersService.ts</tspan></text>
+  <text x="22" y="415" xml:space="preserve"><tspan fill="#3D4A5C">│   │   ├── </tspan><tspan fill="#C9D1D9">utils/sortRepos.ts</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># + sortRepos.test.ts</tspan></text>
+  <text x="22" y="436" xml:space="preserve"><tspan fill="#3D4A5C">│   │   └── </tspan><tspan fill="#C9D1D9">index.ts</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># barrel (API pública)</tspan></text>
+  <text x="22" y="457" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">repositories/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># detalhe do repositório</tspan></text>
+  <text x="22" y="478" xml:space="preserve"><tspan fill="#3D4A5C">│   └── </tspan><tspan fill="#4FD1A5">favorites/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># página de favoritos</tspan></text>
+  <text x="22" y="499" xml:space="preserve"><tspan fill="#3D4A5C">├── </tspan><tspan fill="#4FD1A5">shared/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># reaproveitável entre features</tspan></text>
+  <text x="22" y="520" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">components/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># SearchForm, Feedback, Pagination…</tspan></text>
+  <text x="22" y="541" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">styles/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># theme.ts, GlobalStyle.ts</tspan></text>
+  <text x="22" y="562" xml:space="preserve"><tspan fill="#3D4A5C">│   ├── </tspan><tspan fill="#4FD1A5">types/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># github.ts, favorite.ts, styled.d.ts</tspan></text>
+  <text x="22" y="583" xml:space="preserve"><tspan fill="#3D4A5C">│   └── </tspan><tspan fill="#4FD1A5">utils/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># format, http, favorites, pagination</tspan></text>
+  <text x="22" y="604" xml:space="preserve"><tspan fill="#3D4A5C">├── </tspan><tspan fill="#4FD1A5">state/</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># estado global (Zustand)</tspan></text>
+  <text x="22" y="625" xml:space="preserve"><tspan fill="#3D4A5C">│   └── </tspan><tspan fill="#C9D1D9">useFavoritesStore.ts</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># store + persist (localStorage)</tspan></text>
+  <text x="22" y="646" xml:space="preserve"><tspan fill="#3D4A5C">└── </tspan><tspan fill="#C9D1D9">main.tsx</tspan><tspan x="326.2" fill="#6E7E8C" font-style="italic"># arquivo principal</tspan></text>
+</svg>

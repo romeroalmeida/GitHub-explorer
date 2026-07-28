@@ -78,47 +78,7 @@ Essa é a estrutura base que eu sigo:
 
 E foi assim que ela ficou aqui:
 
-```
-src/
-├── app/
-│   ├── App.tsx                     # provider raiz + RouterProvider
-│   ├── routes/index.tsx            # createBrowserRouter
-│   ├── providers/AppProviders.tsx  # React Query + ThemeProvider + GlobalStyle
-│   └── layout/
-│       ├── RootLayout/             # header (nav) + Outlet   (.tsx + style.ts)
-│       └── Footer/                 # rodapé                  (.tsx + style.ts)
-├── api/
-│   ├── apiClient.ts                # instância do Axios
-│   └── endpoints.ts                # endpoints do GitHub
-├── features/
-│   ├── search/                     # home / busca
-│   │   └── pages/HomePage/         (.tsx + style.ts)
-│   ├── users/                      # perfil + repositórios
-│   │   ├── components/             # UserCard, RepoCard, SortControls
-│   │   ├── hooks/                  # useUser, useUserRepos
-│   │   ├── pages/UserPage/         (.tsx + style.ts)
-│   │   ├── services/usersService.ts
-│   │   ├── utils/                  # sortRepos (+ sortRepos.test.ts)
-│   │   └── index.ts                # barrel (API pública da feature)
-│   ├── repositories/               # detalhe do repositório
-│   │   ├── hooks/useRepository.ts
-│   │   ├── pages/RepoPage/         (.tsx + style.ts)
-│   │   ├── services/repositoriesService.ts
-│   │   └── index.ts
-│   └── favorites/                  # página de favoritos
-│       ├── pages/FavoritesPage/    (.tsx + style.ts)
-│       └── index.ts
-├── shared/
-│   ├── components/                 # SearchForm, Feedback, Pagination,
-│   │                               # FavoriteButton, FavoriteRepoCard
-│   ├── styles/                     # theme.ts, GlobalStyle.ts
-│   ├── types/                      # github.ts, favorite.ts, styled.d.ts
-│   └── utils/                      # format, languageColors, http,
-│                                   # favorites (+ test), pagination (+ test)
-├── state/
-│   └── useFavoritesStore.ts        # Zustand + persist (localStorage)
-└── main.tsx
-```
+![Estrutura do projeto](docs/structure.svg)
 
 Pasta por pasta:
 
@@ -126,14 +86,10 @@ Pasta por pasta:
   `providers/`) e o layout raiz com header e footer (`layout/`)
 - **`api/`** — o cliente Axios (`apiClient.ts`) e os endpoints do GitHub
   (`endpoints.ts`). Só a configuração; quem busca os dados é cada feature
-- **`features/`** — os domínios:
-  - `search/` — a home / busca
-  - `users/` — perfil do usuário + listagem e ordenação de repositórios
-  - `repositories/` — o detalhe de um repositório
-  - `favorites/` — a página de favoritos
-- **`shared/`** — o reaproveitável entre features: componentes (busca, feedback de
-  loading/erro, paginação, botão e card de favorito), estilos/tema, tipos da API e
-  utilitários
+- **`features/`** — os domínios: `search/` (home), `users/` (perfil + repositórios),
+  `repositories/` (detalhe) e `favorites/` (página de favoritos)
+- **`shared/`** — o reaproveitável entre features: componentes, estilos/tema, tipos
+  da API e utilitários
 - **`state/`** — estado global de verdade com **Zustand**: aqui, a store de
   favoritos, persistida no localStorage
 
@@ -145,6 +101,25 @@ Algumas regras que eu sigo pra não virar bagunça:
 - import por **alias `@/`** no lugar de `../../../`
 - cada componente/página fica numa pasta com seu próprio `style.ts`
   (styled-components), importado como `import * as S` e usado como `<S.Container>`
+
+## Por que styled-components (e não Tailwind)
+
+Dava pra ir de Tailwind, que é ótimo pra prototipar rápido. Preferi
+**styled-components** de propósito: como é um teste, quis mostrar domínio de CSS de
+verdade — escrever o estilo na mão, pensar hierarquia, responsividade e estados, em
+vez de compor tudo com utility classes.
+
+E casou bem com a forma como organizo o código:
+
+- cada componente/página tem seu `style.ts` do lado — o estilo mora junto do
+  componente, mas separado do JSX, que fica limpo (sem `className` gigante)
+- os estilos viram uma pequena API semântica (`<S.Card>`, `<S.Title>`): dá pra ler a
+  estrutura da tela só olhando o markup
+- tema tipado (cores, fontes, breakpoints do Bootstrap) via `ThemeProvider`, então
+  não tem hex solto espalhado pelo projeto
+- props dinâmicas direto no estilo (`$active`, `$compact`) sem string condicional de classes
+
+Resumindo: Tailwind entrega velocidade; aqui a escolha foi mostrar controle sobre o CSS.
 
 ## Rotas
 
@@ -174,3 +149,7 @@ Bate direto na API pública do GitHub:
 - `GET /users/{username}` — dados do usuário
 - `GET /users/{username}/repos` — repositórios do usuário
 - `GET /repos/{owner}/{repo}` — detalhe de um repositório
+
+---
+
+Feito por **Romero Almeida** — [www.romeroalmeida.tech](https://www.romeroalmeida.tech)
