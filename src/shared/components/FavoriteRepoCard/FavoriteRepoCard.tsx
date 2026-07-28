@@ -17,19 +17,19 @@ export function FavoriteRepoCard({ repo, compact = false }: FavoriteRepoCardProp
     <S.Card>
       <S.Body to={`/user/${repo.ownerLogin}/repo/${repo.name}`} $compact={compact}>
         <S.Header>
-          <S.Avatar src={repo.ownerAvatar} alt="" />
-          <S.Name>
+          <S.Avatar src={repo.ownerAvatar} alt="" $compact={compact} />
+          <S.Name $compact={compact}>
             {repo.ownerLogin}/{repo.name}
           </S.Name>
         </S.Header>
         {!compact && repo.description && <S.Description>{repo.description}</S.Description>}
-        <S.Meta>
-          <S.MetaItem>
-            <Star size={13} color="#E3B341" />
+        <S.Meta $compact={compact}>
+          <S.MetaItem $compact={compact}>
+            <Star size={compact ? 12 : 13} color="#E3B341" />
             <S.Mono>{formatCount(repo.stargazers_count)}</S.Mono>
           </S.MetaItem>
           {repo.language && (
-            <S.MetaItem>
+            <S.MetaItem $compact={compact}>
               <S.Dot $color={languageColor(repo.language)} />
               <span>{repo.language}</span>
             </S.MetaItem>
@@ -42,7 +42,7 @@ export function FavoriteRepoCard({ repo, compact = false }: FavoriteRepoCardProp
         aria-label={`Remover ${repo.name} dos favoritos`}
         title="Remover dos favoritos"
       >
-        <X size={16} />
+        <X size={compact ? 14 : 16} />
       </S.RemoveButton>
     </S.Card>
   )
