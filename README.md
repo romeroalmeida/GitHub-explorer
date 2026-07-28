@@ -76,7 +76,51 @@ Essa é a estrutura base que eu sigo:
 
 ![Arquitetura feature-based](docs/architecture.png)
 
-Neste projeto ela ficou assim:
+E foi assim que ela ficou aqui:
+
+```
+src/
+├── app/
+│   ├── App.tsx                     # provider raiz + RouterProvider
+│   ├── routes/index.tsx            # createBrowserRouter
+│   ├── providers/AppProviders.tsx  # React Query + ThemeProvider + GlobalStyle
+│   └── layout/
+│       ├── RootLayout/             # header (nav) + Outlet   (.tsx + style.ts)
+│       └── Footer/                 # rodapé                  (.tsx + style.ts)
+├── api/
+│   ├── apiClient.ts                # instância do Axios
+│   └── endpoints.ts                # endpoints do GitHub
+├── features/
+│   ├── search/                     # home / busca
+│   │   └── pages/HomePage/         (.tsx + style.ts)
+│   ├── users/                      # perfil + repositórios
+│   │   ├── components/             # UserCard, RepoCard, SortControls
+│   │   ├── hooks/                  # useUser, useUserRepos
+│   │   ├── pages/UserPage/         (.tsx + style.ts)
+│   │   ├── services/usersService.ts
+│   │   ├── utils/                  # sortRepos (+ sortRepos.test.ts)
+│   │   └── index.ts                # barrel (API pública da feature)
+│   ├── repositories/               # detalhe do repositório
+│   │   ├── hooks/useRepository.ts
+│   │   ├── pages/RepoPage/         (.tsx + style.ts)
+│   │   ├── services/repositoriesService.ts
+│   │   └── index.ts
+│   └── favorites/                  # página de favoritos
+│       ├── pages/FavoritesPage/    (.tsx + style.ts)
+│       └── index.ts
+├── shared/
+│   ├── components/                 # SearchForm, Feedback, Pagination,
+│   │                               # FavoriteButton, FavoriteRepoCard
+│   ├── styles/                     # theme.ts, GlobalStyle.ts
+│   ├── types/                      # github.ts, favorite.ts, styled.d.ts
+│   └── utils/                      # format, languageColors, http,
+│                                   # favorites (+ test), pagination (+ test)
+├── state/
+│   └── useFavoritesStore.ts        # Zustand + persist (localStorage)
+└── main.tsx
+```
+
+Pasta por pasta:
 
 - **`app/`** — o que liga tudo: rotas (`routes/`), providers (React Query + tema em
   `providers/`) e o layout raiz com header e footer (`layout/`)
