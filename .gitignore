@@ -16,3 +16,8 @@ yarn-error.log*
 # arquivos de design / apoio
 layout-teste.pen
 image.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
